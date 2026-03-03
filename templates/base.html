@@ -38,6 +38,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/ie10-viewport-bug-workaround.css' %}">
 
     <script  src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
+
+<!-- Global Variables method for loading company logo -->
+    
+    <script type="text/javascript">
+        var logoUrl = "{% static 'img/logos/logo.png' %}";
+        var blackLogoUrl = "{% static 'img/logos/black-logo.png' %}";
+    </script>
+    
+    <script src="{% static 'js/app.js' %}"></script>
 </head>
 <body>
 <div class="page_loader"></div>
@@ -55,8 +64,8 @@
 <!-- Full Page Search -->
 <div id="full-page-search">
     <button type="button" class="close">×</button>
-    <form action="https://storage.googleapis.com/theme-vessel/carhouse/index.html#" class="search-header">
-        <input type="search" value="" placeholder="type keyword(s) here. Eg: audi, benz etc" />
+    <form action="{% url 'search' %}" class="search-header">
+        <input type="search" value="" placeholder="type keyword(s) here. Eg: audi, benz etc" name="keyword" />
         <button type="submit" class="btn btn-sm button-theme">Search</button>
     </form>
 </div>
