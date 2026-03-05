@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% block title %} | Search Result {% endblock %}
 {% block content %}
 {% load humanize %}
 
@@ -27,9 +28,14 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="model">
-                                    <option disabled="disabled" selected="selected">model</option>
+                                    <option value="" {% if not request.GET.city %}selected{% endif %}>
+                                        Select Model
+                                    </option>
                                     {% for model in model_search %}
-                                        <option value="{{model}}">{{model}}</option>
+                                        <option value="{{model}}" 
+                                        {% if model == request.GET.model %}selected{% endif %}>
+                                            {{model}}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -37,9 +43,14 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="city">
-                                    <option disabled="disabled" selected="selected">Select Location</option>
+                                    <option value="" {% if not request.GET.city %}selected{% endif %}>
+                                        Select Location
+                                    </option>
                                     {% for city in city_search %}
-                                        <option value="{{city}}">{{city}}</option>
+                                        <option value="{{ city }}"
+                                            {% if city == request.GET.city %}selected{% endif %}>
+                                            {{ city }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -47,9 +58,14 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="year">
-                                    <option disabled="disabled" selected="selected">Select Year</option>
+                                    <option value="" {% if not request.GET.year %}selected{% endif %}>
+                                        Select Year
+                                    </option>
                                     {% for year in year_search %}
-                                        <option value="{{year}}">{{year}}</option>
+                                        <option value="{{ year }}"
+                                            {% if year|slugify == request.GET.year %}selected{% endif %}>
+                                            {{ year }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -59,19 +75,30 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="body_style">
-                                    <option disabled="disabled" selected="selected">Select Type Of Car</option>
+                                    <option value="" {% if not request.GET.body_style %}selected{% endif %}>
+                                        Select Type Of Car
+                                    </option>
                                     {% for body_style in body_style_search %}
-                                    <option value="{{body_style}}">{{body_style}}</option>
-                                {% endfor %}
+                                        <option value="{{ body_style }}"
+                                            {% if body_style == request.GET.body_style %}selected{% endif %}>
+                                            {{ body_style }}
+                                        </option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="transmission">
-                                    <option disabled="disabled" selected="selected">Transmission</option>
+                                    <option value="" {% if not request.GET.transmission %}selected{% endif %}>
+                                        All Transmissions
+                                    </option>
+
                                     {% for transmission in transmission_search %}
-                                        <option value="{{transmission}}">{{transmission}}</option>
+                                        <option value="{{ transmission }}"
+                                            {% if transmission == request.GET.transmission %}selected{% endif %}>
+                                            {{ transmission }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>

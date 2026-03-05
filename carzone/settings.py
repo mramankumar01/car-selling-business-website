@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'dashboard'
+
 
 # Application definition
 
@@ -41,6 +43,15 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'ckeditor',
     'django.contrib.humanize',
+    'accounts',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    #Providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'carzone.urls'
@@ -130,3 +143,12 @@ STATICFILES_DIRS = [
 # media settings
 MEDIA_ROOT = BASE_DIR /'media'
 MEDIA_URL = '/media/'
+
+# messages
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
+
+SITE_ID = 1
